@@ -15,4 +15,7 @@ public class NetWork {
     public static void doTest(){
 
     }
+    /*
+        git项目配置
+     */
 }
