@@ -5,6 +5,7 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
         android:supportsRtl="true">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -13,6 +14,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- android:style/Theme.NoDisplay -->
+        <!-- android:style/Theme.Translucent.NoTitleBar -->
+        <!-- android:style/Theme.Translucent.NoTitleBar.Fullscreen -->
+        <activity
+            android:theme="@android:style/Theme.NoDisplay"
+            android:exported="true"
+            android:name=".TranslucentActivity"/>
     </application>
 
 </manifest>

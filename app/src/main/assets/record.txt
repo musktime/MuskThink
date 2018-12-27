@@ -1,0 +1,30 @@
+----am start 发送extra参数
+adb shell am start -n com.virgo.referrer/.MainActivity --es "{offerdata" "{\"action\": 6, \"pkg_name\":\"com.touchsprite.android\"}}"
+
+
+
+------Activity theme在设置透明后奔溃的问题：An activity without a UI must call finish() before onResume() completes
+------Theme加载时机和过程
+	//检查异常
+	ActivityThread.performResumeActivity
+	//判断(!mVisibleFromClient && !mFinished)
+	Activity.performResume();
+	//从赋值mVisibleFromClient
+	Activity.performCreateCommon();
+		mVisibleFromClient = !mWindow.getWindowStyle().getBoolean(com.android.internal.R.styleable.Window_windowNoDisplay, false);
+	//赋值mFinished
+	Activity.finishAffinity();
+	Activity.finishActivity();
+
+
+	// invisible activities must be finished before onResume() completes
+7087        if (!mVisibleFromClient && !mFinished) {
+7088            Log.w(TAG, "An activity without a UI must call finish() before onResume() completes");
+7089            if (getApplicationInfo().targetSdkVersion
+7090                    > android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+7091                throw new IllegalStateException(
+7092                        "Activity " + mComponent.toShortString() +
+7093                        " did not call finish() prior to onResume() completing");
+7094            }
+7095        }
+7096

@@ -8,6 +8,38 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
+        //定义一个维度
+        flavorDimensions 'free', 'charge'
+
+        //渠道
+        productFlavors{
+            channel_aa{
+                dimension "free"
+                applicationId "com.musk.test.aa"
+                buildConfigField 'String','serverUrl','\"https//www.test.api\"'
+            }
+            channel_bb{
+                dimension "charge"
+                applicationId "com.musk.test.bb"
+                buildConfigField 'String','SERVER_URL','\"https//www.normal.api\"'
+            }
+        }
+        //签名
+        signingConfigs{
+            channel_aaRelase{
+                /*storeFile file("../key/xxx1.keystore")
+                storePassword "xxxxxx"
+                keyAlias "alias"
+                keyPassword "xxxxxx"*/
+            }
+            channel_bbRelase{
+                /*storeFile file("../key/xxx1.keystore")
+                storePassword "xxxxxx"
+                keyAlias "alias"
+                keyPassword "xxxxxx"*/
+            }
+        }
     }
     buildTypes {
         release {
@@ -16,6 +48,5 @@ android {
         }
     }
 }
-
 dependencies {
 }

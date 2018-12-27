@@ -1,6 +1,7 @@
 package com.musk.test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.Inflater;
 
 public class MainActivity extends Activity {
 
@@ -24,7 +26,9 @@ public class MainActivity extends Activity {
     }
 
     public void clickBut(View view){
-        Toast.makeText(this,"start",Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this,TranslucentActivity.class));
+
+        /*Toast.makeText(this,"start:"+BuildConfig.serverUrl,Toast.LENGTH_SHORT).show();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -36,7 +40,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     private void testCallable() throws ExecutionException, InterruptedException {
@@ -51,7 +55,7 @@ public class MainActivity extends Activity {
         try {
             Log.i("musk","==isShutdown=="+threadpool.isShutdown());
             threadpool.shutdown();
-            //线程池awaitTermination方法只是判断池是否关闭
+            //线程池awaitTermination方法判断任务是否执行完
             boolean result=threadpool.awaitTermination(15, TimeUnit.SECONDS);
             Log.i("musk","==result-awaitTermination=="+result);
             //关闭池，等待任务执行完毕后关闭
